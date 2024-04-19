@@ -1,3 +1,6 @@
+import 'package:caution_companion/pages/home/home_screen.dart';
+import 'package:caution_companion/pages/profile/profile_page.dart';
+import 'package:caution_companion/pages/report/reports_page.dart';
 import 'package:caution_companion/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       bottomNavigationBar: NavigationBar(
         backgroundColor: Colors.white,
         labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
@@ -50,10 +54,10 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: [
-        const Center(child: Text("Here is Home page"),),
+        const HomeScreen(),
         const Center(child: Text("Here is Map page"),),
-        const Center(child: Text("Here is Reports page"),),
-        const Center(child: Text("Here is Profile page"),),
+        const ReportPage(),
+        const ProfilePage()
       ][currentPageIndex],
     );
   }

@@ -1,5 +1,6 @@
 import 'package:caution_companion/config/theme.dart';
 import 'package:caution_companion/pages/authentication/login_page.dart';
+import 'package:caution_companion/pages/home/home_screen.dart';
 import 'package:caution_companion/pages/home/homepage.dart';
 import 'package:flutter/material.dart';
 

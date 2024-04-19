@@ -17,7 +17,8 @@ class ThemeClass{
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: error400,
+        foregroundColor: warning400,
+        padding: EdgeInsets.zero,
         textStyle: const TextStyle(fontFamily: "Inter", fontSize: 12, fontWeight: FontWeight.w400)
       )
     )
