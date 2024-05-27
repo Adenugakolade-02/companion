@@ -92,7 +92,7 @@ class HttpService{
         return Result.error(CustomError(message: e.message!, statusCode: e.response!.statusCode));
       }
     } else {
-      return Result.error(CustomError(message: e.message!, statusCode: e.response!.statusCode));
+      return Result.error(CustomError(message: e.message??'', statusCode: e.response!.statusCode));
     }
   }
 }
