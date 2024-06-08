@@ -10,6 +10,9 @@ class HttpService{
   static String register = "/users";
   static String login = "/users/login";
   static String getUser = "/users/me";
+  static String reports = "/reports";
+  static String getReports = "/reports/latest";
+  
   
   static Dio _getDioClient(Map<String, dynamic>? queryParameters) {
     var dio = Dio(BaseOptions(
