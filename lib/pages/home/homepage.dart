@@ -1,4 +1,5 @@
 import 'package:caution_companion/pages/home/home_screen.dart';
+import 'package:caution_companion/pages/map/map_screen.dart';
 import 'package:caution_companion/pages/profile/profile_page.dart';
 import 'package:caution_companion/pages/report/reports_page.dart';
 import 'package:caution_companion/utils/app_colors.dart';
@@ -55,7 +56,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: [
         const HomeScreen(),
-        const Center(child: Text("Here is Map page"),),
+        const MapScreen(),
         const ReportPage(),
         const ProfilePage()
       ][currentPageIndex],

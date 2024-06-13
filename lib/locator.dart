@@ -1,4 +1,5 @@
 import 'package:caution_companion/pages/authentication/auth_view_model.dart';
+import 'package:caution_companion/pages/map/map_view_model.dart';
 
 import 'package:caution_companion/services/navigator_service.dart';
 import 'package:caution_companion/services/storage_service.dart';
@@ -15,6 +16,7 @@ void setupServiceLocator(){
 
   // registering models
   serviceLocator.registerLazySingleton(() => AuthViewModel());
+  serviceLocator.registerLazySingleton(() => MapViewModel());
 
 
 }

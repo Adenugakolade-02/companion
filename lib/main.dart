@@ -21,21 +21,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeClass.lightTheme,
-      home: FutureBuilder(
-        future: serviceLocator<AuthViewModel>().getUser(), 
-        builder: (_, snapshot){
-          if(snapshot.connectionState == ConnectionState.done){
-            if(snapshot.data==true){
-              return const HomePage();
-            }else{
-              return const LoginPage();
-            }
-          }else{
-            return const Scaffold(
-              body: Center(child: CircularProgressIndicator.adaptive()));
-          }
-        }
-        ),
+      home: const HomePage(),
+      // home: FutureBuilder(
+      //   future: serviceLocator<AuthViewModel>().getUser(), 
+      //   builder: (_, snapshot){
+      //     if(snapshot.connectionState == ConnectionState.done){
+      //       if(snapshot.data==true){
+      //         return const HomePage();
+      //       }else{
+      //         return const LoginPage();
+      //       }
+      //     }else{
+      //       return const Scaffold(
+      //         body: Center(child: CircularProgressIndicator.adaptive()));
+      //     }
+      //   }
+      //   ),
       navigatorKey: serviceLocator<NavigatorService>().navigatorKey,
     );
   }
