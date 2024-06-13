@@ -46,6 +46,8 @@ dependencies:
   google_maps_flutter: ^2.2.8
   location: ^5.0.0
   geocoding: ^3.0.0
+  overlay_support: ^2.1.0
+  flutter_portal: ^1.1.4
 
 dev_dependencies:
   build_runner: ^2.4.9
