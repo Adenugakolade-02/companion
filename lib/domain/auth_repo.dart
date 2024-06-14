@@ -1,4 +1,5 @@
 import 'package:caution_companion/data/models/result.dart';
+import 'package:caution_companion/data/models/user_model.dart';
 
 abstract class AuthRepository{
   Future<Result<bool>> login({
@@ -12,5 +13,5 @@ abstract class AuthRepository{
     required String lastName
   });
 
-  Future<Result<bool>> getUser();
+  Future<Result<UserModel>> getUser();
 }

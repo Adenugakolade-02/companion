@@ -41,8 +41,7 @@ class AuthRepositoryImpl implements AuthRepository{
       
     return response.when(
       success: (success){
-        final user = UserModel.fromJson(success);
-        serviceLocator<AuthViewModel>().setUser(user);
+        // final user = UserModel.fromJson(success['data']);
         return const Result.success(true);
       }, 
       error: (error){
@@ -52,14 +51,14 @@ class AuthRepositoryImpl implements AuthRepository{
   }
   
   @override
-  Future<Result<bool>> getUser() async{
+  Future<Result<UserModel>> getUser() async{
 
     final response = await HttpService.get(HttpService.getUser, {});
     return response.when(
       success: (success){
         final user = UserModel.fromJson(success);
-        serviceLocator<AuthViewModel>().setUser(user);
-        return const Result.success(true);
+        
+        return  Result.success(user);
       }, error: (error){
         if(error.statusCode==401){
           return Result.error(CustomError.message("Kindly log in again"));

@@ -3,6 +3,7 @@ import 'package:caution_companion/locator.dart';
 import 'package:caution_companion/services/navigator_service.dart';
 
 class AppRoute{
+  static const String homePage = '/homePage';
   static const String homeScreen = '/homeScreen';
   static const String login = '/login';
   static const String registerPage = '/registerPage';

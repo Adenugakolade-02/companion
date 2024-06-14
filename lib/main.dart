@@ -1,3 +1,4 @@
+import 'package:caution_companion/config/router.dart';
 import 'package:caution_companion/config/theme.dart';
 import 'package:caution_companion/locator.dart';
 import 'package:caution_companion/pages/authentication/auth_view_model.dart';
@@ -5,7 +6,8 @@ import 'package:caution_companion/pages/authentication/login_page.dart';
 import 'package:caution_companion/pages/home/home_screen.dart';
 import 'package:caution_companion/pages/home/homepage.dart';
 import 'package:caution_companion/services/navigator_service.dart';
-import 'package:caution_companion/utils/app_aaware.dart';
+import 'package:caution_companion/utils/app_aware.dart';
+import 'package:caution_companion/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 
@@ -42,6 +44,7 @@ class MyApp extends StatelessWidget {
             }
           ),
           navigatorKey: serviceLocator<NavigatorService>().navigatorKey,
+          onGenerateRoute: AppRouter.generateRoute,
         ),
       ),
     );
