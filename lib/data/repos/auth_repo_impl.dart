@@ -19,7 +19,7 @@ class AuthRepositoryImpl implements AuthRepository{
       
     return response.when(
       success: (success){
-        serviceLocator<StorageService>().storeToken("token", success["accessToken"]);
+        serviceLocator<StorageService>().storeToken("token", success["data"]["access_token"]);
         return const Result.success(true);
       }, 
       error: (error){
@@ -56,7 +56,7 @@ class AuthRepositoryImpl implements AuthRepository{
     final response = await HttpService.get(HttpService.getUser, {});
     return response.when(
       success: (success){
-        final user = UserModel.fromJson(success);
+        final user = UserModel.fromJson(success["data"]);
         
         return  Result.success(user);
       }, error: (error){

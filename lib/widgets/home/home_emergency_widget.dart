@@ -1,15 +1,19 @@
+import 'package:caution_companion/data/models/report_model.dart';
+import 'package:caution_companion/helpers/datetime_difference.dart';
+import 'package:caution_companion/helpers/long_lat_address.dart';
 import 'package:caution_companion/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class HomeEmergencyWidget extends StatelessWidget {
-  const HomeEmergencyWidget({super.key});
+  final ReportModel reportModel;
+  const HomeEmergencyWidget({super.key, required this.reportModel});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 184,
-      width: double.infinity,
+      // height: 184,
+      width: double.maxFinite,
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.only(top: 24),
       decoration: BoxDecoration(
@@ -28,23 +32,32 @@ class HomeEmergencyWidget extends StatelessWidget {
                 children: [
                   Text("NEW REPORT", style: TextStyle(fontSize: 12, fontFamily: "Inter", fontWeight: FontWeight.w400, color: grey500),),
                   const SizedBox(height: 4,),
-                  Text("Robbery", style: TextStyle(fontSize: 16, fontFamily: "Inter", fontWeight: FontWeight.w500, color: grey900),)
+                  Text(reportModel.incidentType.name, style: TextStyle(fontSize: 16, fontFamily: "Inter", fontWeight: FontWeight.w500, color: grey900),)
                 ],
               ),
               const Spacer(),
-              Text("3 hours ago ", style: TextStyle(fontSize: 12, fontFamily: "Inter", fontWeight: FontWeight.w400, color: warning400),)
+              Text(formatDateTimeDifference(reportModel.updatedAt), style: TextStyle(fontSize: 12, fontFamily: "Inter", fontWeight: FontWeight.w400, color: warning400),)
             ],
           ),
           const SizedBox(height: 16,),
           
-          Text("Info: There’s a robbery going on at banking area, you may want to avoid the area", style: TextStyle(fontSize: 12, fontFamily: "Inter", fontWeight: FontWeight.w400, color: grey900),),
+          Text("Info: ${reportModel.description}", style: TextStyle(fontSize: 12, fontFamily: "Inter", fontWeight: FontWeight.w400, color: grey900),),
           
           const SizedBox(height: 8,),
           
-          Text("Location: Lagere, Ile-Ife.", style: TextStyle(fontSize: 12, fontFamily: "Inter", fontWeight: FontWeight.w400, color: grey900),),
+          FutureBuilder<String>(
+            future: longLatAddress(reportModel.location.toCoordinates()),
+            builder: (_, snapshot){
+              if(snapshot.connectionState==ConnectionState.done){
+                return Text(snapshot.data!, style: TextStyle(fontSize: 12, fontFamily: "Inter", fontWeight: FontWeight.w400, color: grey900),);
+              }else{
+                return const Text("...");
+              }
+            },
+            ),
 
-          const Spacer(),
-
+          const SizedBox(height: 16,),
+      
           Align(
             alignment: Alignment.centerRight,
             child: SizedBox(

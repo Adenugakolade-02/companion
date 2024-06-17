@@ -13,8 +13,6 @@ class AuthViewModel extends BaseModel{
   final DialogService dialogService = serviceLocator<DialogService>();
 
   UserModel? user;
-  late TextEditingController lEmailController;
-  late TextEditingController lPasswordContoller;
 
 
   void setUser(UserModel userModel){
