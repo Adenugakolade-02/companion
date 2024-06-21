@@ -1,6 +1,7 @@
 import 'package:caution_companion/data/models/result.dart';
 import 'package:caution_companion/locator.dart';
 import 'package:caution_companion/services/storage_service.dart';
+import 'package:caution_companion/utils/app_routes.dart';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -86,9 +87,14 @@ class HttpService{
 
 
   static Result handleError(DioException e) {
+    dynamic data = e.response?.data;
     if (e.response != null) {
-      dynamic data = e.response?.data;
-      if (data != null && data is Map && data.isNotEmpty) {
+      if(e.response?.statusCode==401){
+        AppRoute.go(AppRoute.login,popAll: true);
+        return Result.error(CustomError(message: 'Unauthorized Access', statusCode: e.response!.statusCode));
+      }
+      
+      else if (data != null && data is Map && data.isNotEmpty) {
         Map<String, dynamic> d = Map.from(data);
         return Result.error(CustomError(message: d['message'], statusCode: e.response!.statusCode));
       } else {

@@ -2,11 +2,15 @@ import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
-Future<String> longLatAddress(LatLng _) async{
+Future<String> longLatAddress(LatLng? location) async{
    try {
-    List<Placemark> placemarks = await placemarkFromCoordinates(_.latitude, _.longitude);
+    if(location==null){
+      return "loading";
+    }
+    else{
+      List<Placemark> placemarks = await placemarkFromCoordinates(location.latitude, location.longitude);
 
-    var address = '';
+      var address = '';
 
     if (placemarks.isNotEmpty) {
 
@@ -31,11 +35,12 @@ Future<String> longLatAddress(LatLng _) async{
       address += ', ${placemarks.reversed.last.administrativeArea ?? ''}';
       address += ', ${placemarks.reversed.last.postalCode ?? ''}';
       address += ', ${placemarks.reversed.last.country ?? ''}';
+
+      
     }
-
-    
-
     return address;
+  }
+
   } catch (e) {
     return "Unable to fetch Address";
     // return "No Address";

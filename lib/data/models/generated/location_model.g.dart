@@ -14,6 +14,6 @@ LocationModel _$LocationModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$LocationModelToJson(LocationModel instance) =>
     <String, dynamic>{
-      'longitude': instance.longitude,
-      'latitude': instance.latitude,
+      'longitude': instance.longitude.toString(),
+      'latitude': instance.latitude.toString(),
     };

@@ -35,6 +35,6 @@ class _ResetPageTwoState extends State<ResetPageTwo> {
           ),
           )
       ),
-    );;
+    );
   }
 }

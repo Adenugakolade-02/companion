@@ -1,11 +1,9 @@
 import 'package:caution_companion/base_model.dart';
-import 'package:caution_companion/data/models/result.dart';
 import 'package:caution_companion/data/models/user_model.dart';
 import 'package:caution_companion/data/repos/auth_repo_impl.dart';
 import 'package:caution_companion/locator.dart';
 import 'package:caution_companion/services/dialog_service.dart';
 import 'package:caution_companion/utils/app_routes.dart';
-import 'package:flutter/material.dart';
 
 class AuthViewModel extends BaseModel{
 

@@ -4,7 +4,15 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'generated/report_model.g.dart';
 
-enum IncidentType { robbery, fire }
+enum IncidentType {
+  robbery("Robbery"), 
+  fire("Fire"), 
+  accident("Accident"), 
+  cult("Cult Clash");
+
+  final String value;
+  const IncidentType(this.value) ;
+  }
 
 @JsonSerializable()
 class ReportModel extends Equatable {

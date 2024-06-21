@@ -2,7 +2,6 @@ import 'package:caution_companion/data/models/result.dart';
 import 'package:caution_companion/data/models/user_model.dart';
 import 'package:caution_companion/domain/auth_repo.dart';
 import 'package:caution_companion/locator.dart';
-import 'package:caution_companion/pages/authentication/auth_view_model.dart';
 import 'package:caution_companion/services/http_service.dart';
 import 'package:caution_companion/services/storage_service.dart';
 

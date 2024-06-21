@@ -58,18 +58,19 @@ class kFormField extends StatelessWidget {
 
 class kDropDownFormField<T> extends StatefulWidget {
   final List<DropdownMenuItem<T>> items;
-  // final Function(T?)? function;
+  final T? value;
+  final void Function(T?) callBack;
   final String? Function(T?)? validator;
 
   
-  const kDropDownFormField({super.key, required this.items, this.validator, t});
+  const kDropDownFormField({super.key, required this.items, this.validator, required this.value, required this.callBack});
 
   @override
   State<kDropDownFormField<T>> createState() => _kDropDownFormFieldState<T>();
 }
 
 class _kDropDownFormFieldState<T> extends State<kDropDownFormField<T>> {
-  T? selectedValue;
+  
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
@@ -101,12 +102,8 @@ class _kDropDownFormFieldState<T> extends State<kDropDownFormField<T>> {
       ),
       items: widget.items, 
       validator: widget.validator,
-      onChanged: (_){
-        setState(() {
-          selectedValue = _;
-        });
-      },
-      value: selectedValue,
+      onChanged: widget.callBack,
+      value: widget.value,
     );
   }
 }
