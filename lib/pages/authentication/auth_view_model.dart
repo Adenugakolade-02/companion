@@ -41,8 +41,9 @@ class AuthViewModel extends BaseModel{
     final response = await authRepositoryImpl.login(email: email, password: password);
     setState(false);
     response.when(
-      success: (success){
+      success: (success) async{
         dialogService.displayMessage("Login Successful", status: Status.success);
+        await getUser();
         AppRoute.go(AppRoute.homePage);
       }, 
       error: (error){

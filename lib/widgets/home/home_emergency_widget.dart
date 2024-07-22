@@ -2,6 +2,7 @@ import 'package:caution_companion/data/models/report_model.dart';
 import 'package:caution_companion/helpers/datetime_difference.dart';
 import 'package:caution_companion/helpers/long_lat_address.dart';
 import 'package:caution_companion/utils/app_colors.dart';
+import 'package:caution_companion/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -67,16 +68,21 @@ class HomeEmergencyWidget extends StatelessWidget {
                   padding: EdgeInsets.zero
                 ),
                 onPressed: (){}, 
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "View on the map",
-                    ),
-                    Icon(Icons.arrow_right_alt_sharp)
-                  ],
-                )
+                child: TextButton.icon(
+                  onPressed: ()=>AppRoute.go(AppRoute.homePage, arguments: 1), 
+                  icon: const Text("View on the map"), 
+                  label: const Icon(Icons.arrow_right_alt_sharp)
+                  )
+                // const Row(
+                //   mainAxisAlignment: MainAxisAlignment.end,
+                //   crossAxisAlignment: CrossAxisAlignment.center,
+                //   children: [
+                //     Text(
+                //       "View on the map",
+                //     ),
+                //     Icon(Icons.arrow_right_alt_sharp)
+                //   ],
+                // )
               ),
             ),
           ),

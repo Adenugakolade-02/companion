@@ -19,7 +19,9 @@ class _HomeScreenState extends State<HomeScreen> {
   final authModel = serviceLocator<AuthViewModel>();
   @override
   void initState() {
-    model.fetchReports();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      model.fetchReports();
+    });
     super.initState();
   }
   @override

@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  int pageIndex;
+  HomePage({super.key, this.pageIndex=0});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -17,10 +18,9 @@ class _HomePageState extends State<HomePage> {
 
   void onDestinationSelected(int index){
     setState(() {
-      currentPageIndex = index;
+      widget.pageIndex = index;
     });
   }
-  int currentPageIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
         labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
         indicatorColor: Colors.transparent,
         onDestinationSelected: onDestinationSelected,
-        selectedIndex: currentPageIndex,
+        selectedIndex: widget.pageIndex,
         destinations: <Widget>[
           NavigationDestination(
             icon: _pageIcon("Home","assets/images/home.svg"),
@@ -57,9 +57,9 @@ class _HomePageState extends State<HomePage> {
       body: [
         const HomeScreen(),
         const MapScreen(),
-        const ReportPage(),
+        ReportPage(),
         const ProfilePage()
-      ][currentPageIndex],
+      ][widget.pageIndex],
     );
   }
 

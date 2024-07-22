@@ -29,4 +29,6 @@ Map<String, dynamic> _$ReportModelToJson(ReportModel instance) =>
 const _$IncidentTypeEnumMap = {
   IncidentType.robbery: 'robbery',
   IncidentType.fire: 'fire',
+  IncidentType.accident: 'accident',
+  IncidentType.cult: 'cult',
 };

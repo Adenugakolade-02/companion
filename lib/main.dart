@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
             builder: (_, snapshot){
               if(snapshot.connectionState == ConnectionState.done){
                 if(snapshot.data==true){
-                  return const HomePage();
+                  return HomePage();
                 }else{
                   return const LoginPage();
                 }

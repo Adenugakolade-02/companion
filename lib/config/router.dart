@@ -5,6 +5,7 @@ import 'package:caution_companion/pages/authentication/reset_page_one.dart';
 import 'package:caution_companion/pages/authentication/reset_page_two.dart';
 import 'package:caution_companion/pages/home/home_screen.dart';
 import 'package:caution_companion/pages/home/homepage.dart';
+import 'package:caution_companion/pages/profile/edit_profile_page.dart';
 import 'package:caution_companion/pages/report/create_report_page.dart';
 import 'package:caution_companion/utils/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class AppRouter{
   static Route<dynamic> generateRoute(RouteSettings settings){
     switch (settings.name){
       case AppRoute.homePage:
-        return _buildRoute(const HomePage());
+        return _buildRoute(HomePage(pageIndex: settings.arguments as int? ?? 0,));
       case AppRoute.homeScreen:
         return _buildRoute(const HomeScreen());
       case AppRoute.login:
@@ -28,6 +29,8 @@ class AppRouter{
         return _buildRoute(const OTPPage());
       case AppRoute.createReportPage:
         return _buildRoute(const CreateReportPage());
+      case AppRoute.editProfilePage:
+        return _buildRoute(const EditProfilePage());
       default:
         return _buildRoute(const Scaffold(
           body: Center(child: Text('Invalid route reached.'),),

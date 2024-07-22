@@ -1,4 +1,5 @@
 import 'package:caution_companion/utils/app_colors.dart';
+import 'package:caution_companion/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -23,7 +24,7 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(height: 8,),
               Text("@kalu10", style: TextStyle(fontSize: 14, fontFamily: "Inter", fontWeight: FontWeight.w500, color: grey500),),
 
-              _profileAction(Icon(Icons.person, color: grey900,), "Edit profile", (){}),
+              _profileAction(Icon(Icons.person, color: grey900,), "Edit profile", ()=>AppRoute.go(AppRoute.editProfilePage)),
               _profileAction(Icon(Icons.lock, color: grey900,), "Change password", (){}),
               _profileAction(Icon(Icons.share, color: grey900,), "Share location", (){}),
               _profileAction(Icon(Icons.logout_rounded, color: error400,), "Sign out", (){}),
@@ -45,9 +46,9 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget _profileAction(Icon icon, String title, Function function){
+  Widget _profileAction(Icon icon, String title, void Function() function){
     return InkWell(
-      onTap: function.call(),
+      onTap: function,
       child: Container(
         width: double.infinity,
         height: 56,
