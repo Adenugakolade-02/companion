@@ -12,6 +12,7 @@ class AppRoute{
   static const String otpPage = '/otpPage';
   static const String createReportPage = '/createReportPage';
   static const String editProfilePage = '/editProfilePage';
+  static const String changePasswordPage = '/changePasswordPage';
 
 
   static Future go(String destination, { dynamic arguments, bool? pop, bool? popAll }) async {

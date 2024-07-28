@@ -1,5 +1,8 @@
+import 'package:caution_companion/locator.dart';
+import 'package:caution_companion/pages/authentication/auth_view_model.dart';
 import 'package:caution_companion/utils/app_colors.dart';
 import 'package:caution_companion/utils/app_routes.dart';
+import 'package:caution_companion/utils/widgets/network_image.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -8,6 +11,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final model = serviceLocator<AuthViewModel>();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -18,14 +22,15 @@ class ProfilePage extends StatelessWidget {
               SizedBox(
                 height: size.height/12,
               ),
-              _imageProfileContainer(),
+              NetworkImageWidget(url: model.user?.avatar ?? '', name: model.user?.firstName ?? "CC"),
               const SizedBox(height: 16,),
-              Text("Kalu Udochukwu", style: TextStyle(fontSize: 18, fontFamily: "Inter", fontWeight: FontWeight.w500, color: grey900),),
+              Text("${model.user?.firstName} ${model.user?.lastName}", style: TextStyle(fontSize: 18, fontFamily: "Inter", fontWeight: FontWeight.w500, color: grey900),),
               const SizedBox(height: 8,),
-              Text("@kalu10", style: TextStyle(fontSize: 14, fontFamily: "Inter", fontWeight: FontWeight.w500, color: grey500),),
+              Text("@${model.user?.userName}", style: TextStyle(fontSize: 14, fontFamily: "Inter", fontWeight: FontWeight.w500, color: grey500),),
+              const SizedBox(height: 24,),
 
               _profileAction(Icon(Icons.person, color: grey900,), "Edit profile", ()=>AppRoute.go(AppRoute.editProfilePage)),
-              _profileAction(Icon(Icons.lock, color: grey900,), "Change password", (){}),
+              _profileAction(Icon(Icons.lock, color: grey900,), "Change password", ()=>AppRoute.go(AppRoute.changePasswordPage)),
               _profileAction(Icon(Icons.share, color: grey900,), "Share location", (){}),
               _profileAction(Icon(Icons.logout_rounded, color: error400,), "Sign out", (){}),
             ],

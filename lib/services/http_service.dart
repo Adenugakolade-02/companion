@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:caution_companion/data/models/result.dart';
 import 'package:caution_companion/locator.dart';
 import 'package:caution_companion/services/storage_service.dart';
@@ -11,8 +13,10 @@ class HttpService{
   static String register = "/users";
   static String login = "/users/login";
   static String getUser = "/users/me";
+  static String changePassword = "/users/password";
   static String reports = "/reports";
   static String getReports = "/reports/latest";
+  static String uploadfile = "/files/upload";
   
   
   static Dio _getDioClient(Map<String, dynamic>? queryParameters) {
@@ -78,6 +82,19 @@ class HttpService{
       // AppHttpResponse res = AppHttpResponse(false, response.data, '');
       return Result.success(response.data);
     } on DioException catch (e) {
+      return handleError(e);
+    }
+  }
+
+  static Future<Result<dynamic>> uploadFile(String path, File file) async{
+    final formData = FormData.fromMap(
+      {'file': await MultipartFile.fromFile(file.path)}
+    );
+
+    try{
+      Response response = await _getDioClient({}).post(path, data: formData);
+      return Result.success(response.data);
+    } on DioException catch(e){
       return handleError(e);
     }
   }

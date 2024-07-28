@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:caution_companion/data/models/result.dart';
 import 'package:caution_companion/data/models/user_model.dart';
 import 'package:caution_companion/domain/auth_repo.dart';
@@ -66,5 +70,63 @@ class AuthRepositoryImpl implements AuthRepository{
         }
       });
   }
+  
+  @override
+  Future<Result<bool>> updateProfile({required String email, required String firstName, required String lastName, required String userName, required String location, required String phone, required String avatar}) async{
+    final response = await HttpService.put(HttpService.register, {
+      "email": email,
+      "first_name": firstName,
+      "last_name": lastName,
+      "user_name": userName,
+      "location": location,
+      "phone": phone,
+      "avatar":avatar
+    });
+
+    return response.when(
+      success: (success){
+        return const Result.success(true);
+      }, 
+      error: (error){
+        return Result.error(error);
+      }
+    );
+  }
+
+  @override
+  Future<Result<String>> uploadFile({required File file}) async{
+   final response = await HttpService.uploadFile(HttpService.uploadfile, file);
+   return response.when(
+    success: (success){
+      final decodedJson = jsonDecode(success);
+
+      final String url = decodedJson['data']['url'];
+      log("upload done");
+      return Result.success(url);
+    }, 
+    error: (error){
+      return Result.error(error);
+    }
+    );
+  }
+  
+  @override
+  Future<Result<bool>> changePassword({required String oldPassword, required String newPassword}) async{
+    final response = await HttpService.put(HttpService.changePassword, {
+      "old_password": oldPassword,
+      "new_password": newPassword
+    });
+
+    return response.when(
+      success: (success){
+        return const Result.success(true);
+      }, 
+      error: (error){
+        return Result.error(error);
+      }
+    );
+  }
+
+  
   
 }
