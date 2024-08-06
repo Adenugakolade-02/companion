@@ -14,6 +14,9 @@ class HttpService{
   static String login = "/users/login";
   static String getUser = "/users/me";
   static String changePassword = "/users/password";
+  static String forgotPassword = "/users/forgot-password";
+  static String verifyToken = "/users/reset-password/verify-token";
+  static String resetPassword = "/users/reset-password";
   static String reports = "/reports";
   static String getReports = "/reports/latest";
   static String uploadfile = "/files/upload";

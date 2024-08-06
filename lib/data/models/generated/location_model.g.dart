@@ -8,12 +8,12 @@ part of '../location_model.dart';
 
 LocationModel _$LocationModelFromJson(Map<String, dynamic> json) =>
     LocationModel(
-      longitude: (json['longitude'] as num).toDouble(),
-      latitude: (json['latitude'] as num).toDouble(),
+      longitude: double.parse(json['longitude']),
+      latitude: double.parse(json['latitude']),
     );
 
 Map<String, dynamic> _$LocationModelToJson(LocationModel instance) =>
     <String, dynamic>{
-      'longitude': instance.longitude,
-      'latitude': instance.latitude,
+      'longitude': instance.longitude.toString(),
+      'latitude': instance.latitude.toString(),
     };

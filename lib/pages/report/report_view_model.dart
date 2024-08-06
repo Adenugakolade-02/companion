@@ -24,6 +24,7 @@ class ReportViewModel extends ChangeNotifier{
   
 
   List<ReportModel> reportList = [];
+  List<ReportModel> displayList = [];
   
 
   Future<bool> fetchReports() async{
@@ -32,7 +33,8 @@ class ReportViewModel extends ChangeNotifier{
     final response = await reportRepositoryImpl.getReports();
     setState(ReportStates.idle);
     return response.when(success: (success){
-      reportList = success;
+      reportList = success.reversed.toList();
+      displayList = reportList;
       notifyListeners();
       return true;
     }, error: (error){

@@ -3,6 +3,7 @@ import 'package:caution_companion/config/theme.dart';
 import 'package:caution_companion/locator.dart';
 import 'package:caution_companion/pages/authentication/auth_view_model.dart';
 import 'package:caution_companion/pages/authentication/login_page.dart';
+import 'package:caution_companion/pages/authentication/reset_page_one.dart';
 import 'package:caution_companion/pages/home/homepage.dart';
 import 'package:caution_companion/services/navigator_service.dart';
 import 'package:caution_companion/utils/app_aware.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeClass.lightTheme,
-          // home: const HomePage(),
+          // home: const ResetPageone(),
           home: FutureBuilder(
             future: serviceLocator<AuthViewModel>().getUser(), 
             builder: (_, snapshot){

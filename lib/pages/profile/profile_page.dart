@@ -1,5 +1,6 @@
 import 'package:caution_companion/locator.dart';
 import 'package:caution_companion/pages/authentication/auth_view_model.dart';
+import 'package:caution_companion/services/storage_service.dart';
 import 'package:caution_companion/utils/app_colors.dart';
 import 'package:caution_companion/utils/app_routes.dart';
 import 'package:caution_companion/utils/widgets/network_image.dart';
@@ -31,22 +32,16 @@ class ProfilePage extends StatelessWidget {
 
               _profileAction(Icon(Icons.person, color: grey900,), "Edit profile", ()=>AppRoute.go(AppRoute.editProfilePage)),
               _profileAction(Icon(Icons.lock, color: grey900,), "Change password", ()=>AppRoute.go(AppRoute.changePasswordPage)),
-              _profileAction(Icon(Icons.share, color: grey900,), "Share location", (){}),
-              _profileAction(Icon(Icons.logout_rounded, color: error400,), "Sign out", (){}),
+              _profileAction(
+                Icon(Icons.logout_rounded, color: error400,), 
+                "Sign out", 
+                (){
+                  AppRoute.go(AppRoute.login, popAll: true);
+                  serviceLocator<StorageService>().clearToken("token");
+                }),
             ],
           ),
         )
-      ),
-    );
-  }
-
-  Widget _imageProfileContainer(){
-    return Container(
-      height: 146,
-      width: 146,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: grey900
       ),
     );
   }

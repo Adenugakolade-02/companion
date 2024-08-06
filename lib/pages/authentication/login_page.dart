@@ -32,8 +32,8 @@ class _LoginPageState extends State<LoginPage> {
   }
   @override
   void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
+    // emailController.dispose();
+    // passwordController.dispose();
     super.dispose();
   }
   @override
@@ -47,49 +47,51 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               Form(
                 key: loginFormKey,
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-                  children: [
-                    SizedBox(height: size.height/12,),
-                    Text("Welcome back!", style: TextStyle(fontSize: 24, fontFamily: "Inter", fontWeight: FontWeight.w600, color: grey900),),
-                    const SizedBox(height: 7,),
-                    Text("Sign in using your registered account", style: TextStyle(fontSize: 14, fontFamily: "Inter", fontWeight: FontWeight.w500, color: grey500),),
-                    
-                    SizedBox(height: size.height/12,),
-                    
-                    kFormField(hintText: "Email", controller: emailController, prefixIcon: Icon(Icons.email_outlined, color: warning400,), validator: emailValidator,),
-                    const SizedBox(height: 24,),
-                    kFormField(hintText: "Password", controller: passwordController, prefixIcon: Icon(Icons.lock, color: warning400,), validator: genericValidator,),
-                    const SizedBox(height: 16,),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(onPressed: ()=>AppRoute.go(AppRoute.resetPageone), child: const Text("Forgot Password?")),
-                    ),
-                    SizedBox(height: size.height/14,),
-                    ElevatedButton(onPressed: (){
-                      if(loginFormKey.currentState!.validate()){
-                        model.login(email: emailController.text, password: passwordController.text);
-                      }
-                    }, child: const Text("Sign in")),
-                    
-                    SizedBox(height: size.height/8,),
-                    
-                    Center(
-                      child: RichText(
-                        text: TextSpan(
-                          text: "Don’t have an account? ",
-                          style: TextStyle(fontSize: 14, fontFamily: "Inter", fontWeight: FontWeight.w400, color: grey500),
-                          children: [
-                            TextSpan(
-                              text: "Sign up",
-                              style: TextStyle(fontSize: 14, fontFamily: "Inter", fontWeight: FontWeight.w400, color: error400),
-                              recognizer:  TapGestureRecognizer()..onTap = ()=>AppRoute.go(AppRoute.registerPage)
-                            )
-                          ]
-                        )
+                child: AutofillGroup(
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                    children: [
+                      SizedBox(height: size.height/12,),
+                      Text("Welcome back!", style: TextStyle(fontSize: 24, fontFamily: "Inter", fontWeight: FontWeight.w600, color: grey900),),
+                      const SizedBox(height: 7,),
+                      Text("Sign in using your registered account", style: TextStyle(fontSize: 14, fontFamily: "Inter", fontWeight: FontWeight.w500, color: grey500),),
+                      
+                      SizedBox(height: size.height/12,),
+                      
+                      kFormField(hintText: "Email", controller: emailController, prefixIcon: Icon(Icons.email_outlined, color: warning400,), validator: emailValidator, autofillHints: const [AutofillHints.email],),
+                      const SizedBox(height: 24,),
+                      kFormField(hintText: "Password", controller: passwordController, prefixIcon: Icon(Icons.lock, color: warning400,), validator: genericValidator, autofillHints: const[AutofillHints.password],),
+                      const SizedBox(height: 16,),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(onPressed: ()=>AppRoute.go(AppRoute.resetPageone), child: const Text("Forgot Password?")),
                       ),
-                    )
-                  ],
+                      SizedBox(height: size.height/14,),
+                      ElevatedButton(onPressed: (){
+                        if(loginFormKey.currentState!.validate()){
+                          model.login(email: emailController.text, password: passwordController.text);
+                        }
+                      }, child: const Text("Sign in")),
+                      
+                      SizedBox(height: size.height/8,),
+                      
+                      Center(
+                        child: RichText(
+                          text: TextSpan(
+                            text: "Don’t have an account? ",
+                            style: TextStyle(fontSize: 14, fontFamily: "Inter", fontWeight: FontWeight.w400, color: grey500),
+                            children: [
+                              TextSpan(
+                                text: "Sign up",
+                                style: TextStyle(fontSize: 14, fontFamily: "Inter", fontWeight: FontWeight.w400, color: error400),
+                                recognizer:  TapGestureRecognizer()..onTap = ()=>AppRoute.go(AppRoute.registerPage)
+                              )
+                            ]
+                          )
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               Consumer<AuthViewModel>(

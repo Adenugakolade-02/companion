@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(),
                     Text("Hi ${authModel.user?.firstName??""}, Welcome back", style: TextStyle(fontSize: 16, fontFamily: "Inter", fontWeight: FontWeight.w500, color: grey900),),
                     const Spacer(),
-                    Text("Ile-Ife", style: TextStyle(fontSize: 12, fontFamily: "Inter", fontWeight: FontWeight.w500, color: grey900),)
+                    Text(authModel.user?.location ?? "", style: TextStyle(fontSize: 12, fontFamily: "Inter", fontWeight: FontWeight.w500, color: grey900),)
                   ],
                 ),
                 const SizedBox(height: 24,),
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Consumer<ReportViewModel>(
                   builder: (_,model,__) {
                     return switch(model.state){
-                      ReportStates.loading=>const Center(child: CircularProgressIndicator.adaptive(),),
+                      // ReportStates.loading=>const SizedBox.shrink(),
                       ReportStates.fail => Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -72,9 +72,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],),
                       _ => Column(
                         children: [
-                          if(model.reportList.isEmpty)
+                          if(model.displayList.isEmpty)
                             const Text("No Report available, create new reports"),
-                          ...model.reportList.map((e) => HomeEmergencyWidget(reportModel: e)).toList()
+                          ...model.displayList.map((e) => HomeEmergencyWidget(reportModel: e)).toList()
                         ],
                       )
                     };

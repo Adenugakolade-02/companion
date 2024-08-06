@@ -22,6 +22,11 @@ class _MapDialogState extends State<MapDialog> {
   LatLng? selectedLocation;
   String? selectedAddress;
 
+  Marker selectedLocationMarker = Marker(
+    markerId: const MarkerId("incident_location"),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue)
+  );
+
   final Completer<GoogleMapController> _mapController = Completer<GoogleMapController>();
   final MapViewModel model = serviceLocator<MapViewModel>();
 
@@ -71,12 +76,18 @@ class _MapDialogState extends State<MapDialog> {
                           position: currentLocation!,
                           icon: BitmapDescriptor.defaultMarker
                           ),
+                          selectedLocationMarker
                         // ...snapshot.data!
                       },
                       onTap: (location) async{
                         // final addresses = await Geocodin.local.findAddressesFromCoordinates(_);
                         setState(() {
                           selectedLocation = location;
+                          selectedLocationMarker = Marker(
+                            markerId: const MarkerId("incident_location"),
+                            position: location,
+                            icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue)
+                          );
                         });
 
                       },

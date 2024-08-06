@@ -11,7 +11,8 @@ class kFormField extends StatelessWidget {
   Widget? prefixIcon;
   bool? readOnly;
   int? maxLines;
-  kFormField({super.key, required this.hintText, required this.controller, this.validator, this.suffixIcon, this.prefixIcon, this.maxLines ,this.readOnly=false});
+  List<String>? autofillHints;
+  kFormField({super.key, required this.hintText, required this.controller, this.validator, this.suffixIcon, this.prefixIcon, this.maxLines ,this.readOnly=false, this.autofillHints});
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +53,7 @@ class kFormField extends StatelessWidget {
       controller: controller,
       validator: validator,
       maxLines: maxLines,
+      autofillHints: autofillHints,
     );
   }
 }

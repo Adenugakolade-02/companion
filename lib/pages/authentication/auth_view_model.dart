@@ -1,16 +1,11 @@
-// import 'dart:html';
-
 import 'dart:io';
-
 import 'package:caution_companion/base_model.dart';
-import 'package:caution_companion/data/models/result.dart';
 import 'package:caution_companion/data/models/user_model.dart';
 import 'package:caution_companion/data/repos/auth_repo_impl.dart';
 import 'package:caution_companion/locator.dart';
 import 'package:caution_companion/services/dialog_service.dart';
 import 'package:caution_companion/utils/app_colors.dart';
 import 'package:caution_companion/utils/app_routes.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -21,6 +16,7 @@ class AuthViewModel extends BaseModel{
   final DialogService dialogService = serviceLocator<DialogService>();
 
   UserModel? user;
+  String otpCode = '';
 
 
   void setUser(UserModel userModel){
@@ -163,4 +159,54 @@ class AuthViewModel extends BaseModel{
     );
   }
 
+  Future<bool> forgotPassword({required String email}) async{
+    setState(true);
+    final response = await authRepositoryImpl.forgotPassword(email: email);
+    setState(false);
+
+    return response.when(
+      success: (success){
+        dialogService.displayMessage("Reset password email sent successfully", status: Status.success);
+        return true;
+      }, 
+      error: (error){
+        dialogService.displayMessage(error.message);
+        return false;
+      }
+    );
+  }
+
+  Future<bool> verifyToken({required String token}) async{
+    setState(true);
+    final response = await authRepositoryImpl.verifyToken(token: token);
+    setState(false);
+
+    return response.when(
+      success: (success){
+        dialogService.displayMessage("Token verified successfully", status:  Status.success);
+        return true;
+      }, 
+      error: (error){
+        dialogService.displayMessage(error.message);
+        return false;
+      }
+    );
+  }
+
+  Future<bool> resetPassword({required String token, required String password, required String cPassword}) async{
+    setState(true);
+    final response = await authRepositoryImpl.resetPassword(token: token, password: password, cPassword: cPassword);
+    setState(false);
+
+    return response.when(
+      success: (success){
+        dialogService.displayMessage("Password reset successfully", status: Status.success);
+        return true;
+      }, 
+      error: (error){
+        dialogService.displayMessage(error.message);
+        return false;
+      }
+    );
+  }
 }

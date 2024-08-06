@@ -1,6 +1,7 @@
 import 'package:caution_companion/data/models/report_model.dart';
 import 'package:caution_companion/helpers/datetime_difference.dart';
 import 'package:caution_companion/locator.dart';
+import 'package:caution_companion/pages/map/map_view_model.dart';
 import 'package:caution_companion/pages/report/report_view_model.dart';
 import 'package:caution_companion/utils/app_colors.dart';
 import 'package:caution_companion/utils/app_routes.dart';
@@ -12,6 +13,7 @@ class ReportPage extends StatelessWidget {
   ReportPage({super.key});
 
   final model = serviceLocator<ReportViewModel>();
+  final mapModel = serviceLocator<MapViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +69,9 @@ class ReportPage extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          TextButton(onPressed: ()=>AppRoute.go(AppRoute.homePage, arguments: 1), child: const Text("View on the map"))
+          TextButton(onPressed: (){
+            mapModel.setSelectedIncident(reportModel);
+            AppRoute.go(AppRoute.homePage, arguments: 1);}, child: const Text("View on the map"))
         ],
       ),
     );

@@ -126,6 +126,52 @@ class AuthRepositoryImpl implements AuthRepository{
       }
     );
   }
+  
+  @override
+  Future<Result<bool>> forgotPassword({required String email}) async{
+    final response = await HttpService.post(HttpService.forgotPassword, {"email":email});
+
+    return response.when(
+      success: (success){
+        return const Result.success(true);
+      }, 
+      error: (error){
+        return Result.error(error);
+      }
+    );
+  }
+  
+  @override
+  Future<Result<bool>> resetPassword({required String token, required String password, required String cPassword}) async{
+    final response = await HttpService.post(HttpService.resetPassword, {
+      "token":token,
+      "password": password,
+      "confirm_password": cPassword
+    });
+
+    return response.when(
+      success: (success){
+        return const Result.success(true);
+      }, 
+      error: (error){
+        return Result.error(error);
+      }
+    );
+  }
+  
+  @override
+  Future<Result<bool>> verifyToken({required String token}) async{
+    final response = await HttpService.post(HttpService.verifyToken, {"token": token});
+
+    return response.when(
+      success: (success){
+        return const Result.success(true);
+      }, 
+      error: (error){
+        return Result.error(error);
+      }
+    );
+  }
 
   
   
